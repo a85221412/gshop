@@ -4,13 +4,13 @@
       <div class="login_header">
         <h2 class="login_logo">Mint外卖</h2>
         <div class="login_header_title">
-          <a class="on">短信登录</a>
-          <a>密码登录</a>
+          <a :class="{on: loginWay}" @click="loginWay=true">短信登录</a>
+          <a :class="{on: !loginWay}" @click="loginWay=false">密码登录</a>
         </div>
       </div>
       <div class="login_content">
         <form>
-          <div class="on">
+          <div :class="{on: loginWay}">
             <div class="login_message">
               <input type="tel" maxlength="11" placeholder="手机号">
               <button disabled="disabled" class="get_verification">获取验证码
@@ -24,7 +24,7 @@
               <a href="javascript:;">《用户服务协议》</a>
             </div>
           </div>
-          <div>
+          <div :class="{on: !loginWay}">
             <div>
               <div class="login_message">
                 <input type="text" maxlength="11" placeholder="手机/邮箱/用户名">
@@ -57,7 +57,13 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    data() {
+      return {
+        loginWay: false
+      }
+    }
+  }
 </script>
 
 <style>
