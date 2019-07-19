@@ -11,9 +11,17 @@
     <div  class="msite_nav">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">Slide 1</div>
-          <div class="swiper-slide">Slide 2</div>
-          <div class="swiper-slide">Slide 3</div>
+          <div class="swiper-slide">
+            <span>
+              <img class="img" src="./images/1.jpg" alt="">
+            </span>
+          </div>
+          <div class="swiper-slide"><span>
+              <img class="img" src="./images/2.jpg" alt="">
+            </span></div>
+          <div class="swiper-slide"><span>
+              <img class="img" src="./images/3.jpg" alt="">
+            </span></div>
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
@@ -167,6 +175,10 @@
   .swiper-container {
     width: 100%;
     height: 100%;
+  }
+  .img{
+    width: 100%;
+    height: 200px;
   }
 
 

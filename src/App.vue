@@ -7,14 +7,12 @@
 
 <script>
   import FooterGuide from './components/FooterGuide/FooterGuide'
-  import {reqallclient} from "./api/index";
   import {selectall} from './api/api'
 
   export default {
     async mounted() {
-
       await selectall().then((result) => {
-        console.log(result)
+        console.log(result.data)
       }).catch((error) => {
         console.log(error)
       })

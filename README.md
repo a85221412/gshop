@@ -1,21 +1,14 @@
-# y
+# 这是一个基于vue.js的移动web外卖项目
 
-> y
+> 本人是应届毕业生,这是个人写着玩的，不是什么上线项目，纯粹用来学习vue
 
-## Build Setup
+## 主要技术栈
+> vue.js + vue-router + vue-cli + axios + vuex
 
-``` bash
-# install dependencies
-npm install
+> 工具: npm + webpack + git
 
-# serve with hot reload at localhost:8080
-npm run dev
+> 编译器: IDEA 
 
-# build for production with minification
-npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
