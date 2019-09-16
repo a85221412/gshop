@@ -2,12 +2,12 @@
   <div class="profile">
     <HeaderTop title="我的"></HeaderTop>
     <div class="profile-number">
-      <router-link to="/login" class="profile-link">
+      <router-link :to="userinfo.username ? '/userinfo':'/login'" class="profile-link">
         <div class="profile_image">
           <i class="iconfont icon-wode-F"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <p class="user-info-top">{{userinfo.username||'登录/注册'}}</p>
           <p>
               <span class="user-icon">
                 <i class="iconfont icon-phone"></i>
@@ -88,13 +88,45 @@
         </div>
       </div>
     </div>
+    <section class="profile_my_order border-1px">
+      <button type="danger" style="width: 100%" v-if="userinfo.username" @click="logout()">退出登录</button>
+    </section>
   </div>
 </template>
 
 <script>
   import HeaderTop from '../../components/HeaderTop/HeaderTop'
-
+  import { MessageBox, Toast } from 'mint-ui'
   export default {
+    data() {
+      return {
+        userinfo: {}
+      }
+    },
+    mounted() {
+      if (localStorage.userinfo) {
+        this.userinfo = JSON.parse(localStorage.userinfo)
+      }
+    },
+    methods: {
+      logout() {
+        var that = this
+        MessageBox.confirm('确认退出吗?').then(
+          action => {
+            // 请求退出
+            localStorage.removeItem("userinfo")
+            Toast('退出成功')
+            that.$router.go(0)
+          },
+          action => {
+            console.log('取消登录')
+          }
+        )
+      }
+    },
+    // computed: {
+    //   userinfo: localStorage.userinfo
+    // },
     components: {
       HeaderTop
     }

@@ -1,14 +1,58 @@
 <template>
   <div class="shop_container">
     <ul class="shop_list">
-      <li class="shop_li">
+<!--      <li class="shop_li" v-for="(item,index) in shopslist" :key="index" @click="$router.push('/shop')">-->
+<!--        <div class="shop_li_a">-->
+<!--          <div class="shop_left">-->
+<!--            <img class="shop_img" src="">-->
+<!--          </div>-->
+<!--          <div class="shop_right">-->
+<!--            <div class="shop_detail_header">-->
+<!--              <h4 class="shop_title ellipsis">{{item.shopName}}</h4>-->
+<!--              <ul class="shop_detail_ul">-->
+<!--                <li class="supports">-->
+<!--                  保-->
+<!--                </li>-->
+<!--                <li class="supports">-->
+<!--                  准-->
+<!--                </li>-->
+<!--                <li class="supports">-->
+<!--                  票-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--            <div class="shop_rating_order">-->
+<!--              <div class="shop_rating_order_left">-->
+<!--                <Star :score="item.shopStar" :size="24"></Star>-->
+<!--                <div class="rating_section">-->
+<!--                  {{item.shopStar}}-->
+<!--                </div>-->
+<!--                <div class="order_section">-->
+<!--                  月售{{item.shopMonthlysales}}单-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="shop_rating_order_right">-->
+<!--                <span class="delivery_style delivery_right">美团专送</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="shop_distance">-->
+<!--              <p class="shop_delivery_msg">-->
+<!--                <span>¥{{item.shopSendingfee}}起送</span>-->
+<!--                <span class="segmentation">/</span>-->
+<!--                <span>配送费约¥{{item.shopDistributingfee}}</span>-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </li >-->
+      <li class="shop_li" @click="$router.push('/shop')">
         <div class="shop_li_a">
           <div class="shop_left">
-            <img class="shop_img" src="">
+            <img class="shop_img" src="./image/MDN.jpg">
           </div>
           <div class="shop_right">
             <div class="shop_detail_header">
-              <h4 class="shop_title ellipsis">店名</h4>
+              <h4 class="shop_title ellipsis">麦当劳</h4>
               <ul class="shop_detail_ul">
                 <li class="supports">
                   保
@@ -23,12 +67,12 @@
             </div>
             <div class="shop_rating_order">
               <div class="shop_rating_order_left">
-                <!--                <Star :score="shop.rating" :size="24"></Star>-->
+                <Star :score="4.2" :size="24"></Star>
                 <div class="rating_section">
-                  4.1
+                  4.2
                 </div>
                 <div class="order_section">
-                  月售111单
+                  月售999单
                 </div>
               </div>
               <div class="shop_rating_order_right">
@@ -37,22 +81,22 @@
             </div>
             <div class="shop_distance">
               <p class="shop_delivery_msg">
-                <span>¥10起送</span>
+                <span>¥20起送</span>
                 <span class="segmentation">/</span>
-                <span>配送费约¥5</span>
+                <span>配送费约¥9</span>
               </p>
             </div>
           </div>
         </div>
-      </li>
-      <li class="shop_li">
+      </li >
+      <li class="shop_li" @click="$router.push('/shop')">
         <div class="shop_li_a">
           <div class="shop_left">
-            <img class="shop_img" src="">
+            <img class="shop_img" src="./image/KFC.jpg">
           </div>
           <div class="shop_right">
             <div class="shop_detail_header">
-              <h4 class="shop_title ellipsis">店名</h4>
+              <h4 class="shop_title ellipsis">肯德基</h4>
               <ul class="shop_detail_ul">
                 <li class="supports">
                   保
@@ -67,12 +111,12 @@
             </div>
             <div class="shop_rating_order">
               <div class="shop_rating_order_left">
-                <!--                <Star :score="shop.rating" :size="24"></Star>-->
+                <Star :score="4.2" :size="24"></Star>
                 <div class="rating_section">
-                  4.1
+                  4.2
                 </div>
                 <div class="order_section">
-                  月售111单
+                  月售999单
                 </div>
               </div>
               <div class="shop_rating_order_right">
@@ -81,20 +125,118 @@
             </div>
             <div class="shop_distance">
               <p class="shop_delivery_msg">
-                <span>¥10起送</span>
+                <span>¥20起送</span>
                 <span class="segmentation">/</span>
-                <span>配送费约¥5</span>
+                <span>配送费约¥9</span>
               </p>
             </div>
           </div>
         </div>
-      </li>
+      </li >
+      <li class="shop_li" @click="$router.push('/shop')">
+        <div class="shop_li_a">
+          <div class="shop_left">
+            <img class="shop_img" src="./image/BSK.jpg">
+          </div>
+          <div class="shop_right">
+            <div class="shop_detail_header">
+              <h4 class="shop_title ellipsis">必胜客</h4>
+              <ul class="shop_detail_ul">
+                <li class="supports">
+                  保
+                </li>
+                <li class="supports">
+                  准
+                </li>
+                <li class="supports">
+                  票
+                </li>
+              </ul>
+            </div>
+            <div class="shop_rating_order">
+              <div class="shop_rating_order_left">
+                <Star :score="4.2" :size="24"></Star>
+                <div class="rating_section">
+                  4.2
+                </div>
+                <div class="order_section">
+                  月售999单
+                </div>
+              </div>
+              <div class="shop_rating_order_right">
+                <span class="delivery_style delivery_right">美团专送</span>
+              </div>
+            </div>
+            <div class="shop_distance">
+              <p class="shop_delivery_msg">
+                <span>¥20起送</span>
+                <span class="segmentation">/</span>
+                <span>配送费约¥9</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </li >
+      <li class="shop_li" @click="$router.push('/shop')">
+        <div class="shop_li_a">
+          <div class="shop_left">
+            <img class="shop_img" src="./image/HBW.jpg">
+          </div>
+          <div class="shop_right">
+            <div class="shop_detail_header">
+              <h4 class="shop_title ellipsis">汉堡王</h4>
+              <ul class="shop_detail_ul">
+                <li class="supports">
+                  保
+                </li>
+                <li class="supports">
+                  准
+                </li>
+                <li class="supports">
+                  票
+                </li>
+              </ul>
+            </div>
+            <div class="shop_rating_order">
+              <div class="shop_rating_order_left">
+                <Star :score="4.2" :size="24"></Star>
+                <div class="rating_section">
+                  4.2
+                </div>
+                <div class="order_section">
+                  月售999单
+                </div>
+              </div>
+              <div class="shop_rating_order_right">
+                <span class="delivery_style delivery_right">美团专送</span>
+              </div>
+            </div>
+            <div class="shop_distance">
+              <p class="shop_delivery_msg">
+                <span>¥20起送</span>
+                <span class="segmentation">/</span>
+                <span>配送费约¥9</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </li >
     </ul>
   </div>
 </template>
 
 <script>
-  export default {}
+  import {mapState} from 'vuex'
+  import Star from '../star/star'
+
+  export default {
+    computed: {
+      ...mapState(['shopslist'])
+    },
+    components: {
+      Star
+    }
+  }
 </script>
 
 <style>
@@ -255,6 +397,7 @@
     width: 100%;
     font-size: 12px;
   }
+
   .shop_distance::after {
     content: '';
     display: block;

@@ -9,15 +9,17 @@
         </div>
       </div>
       <div class="login_content">
-        <form>
+        <form @submit.prevent="login">
           <div :class="{on: loginWay}">
             <div class="login_message">
-              <input type="tel" maxlength="11" placeholder="手机号">
-              <button disabled="disabled" class="get_verification">获取验证码
+              <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
+              <button :disabled="!right_phone" class="get_verification"
+                      :class="{right_phone:right_phone}" @click.prevent="getcode">
+                {{timeout>0?`已发送(${timeout}s)`:'发送验证码'}}
               </button>
             </div>
             <div class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码">
+              <input type="tel" maxlength="8" placeholder="验证码" v-model="code">
             </div>
             <div class="login_hint">
               温馨提示：未注册Mint外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -27,19 +29,19 @@
           <div :class="{on: !loginWay}">
             <div>
               <div class="login_message">
-                <input type="text" maxlength="11" placeholder="手机/邮箱/用户名">
+                <input type="text" maxlength="11" placeholder="手机/邮箱/用户名" v-model="username">
               </div>
               <div class="login_verification">
-                <input type="tel" maxlength="8" placeholder="密码">
-                <!--                <input type="password" maxlength="8" placeholder="密码" v-else v-model="pwd">-->
-                <div class="switch_button off">
-                  <div class="switch_circle"></div>
-                  <span class="switch_text">...</span>
+                <input type="tel" maxlength="8" placeholder="密码" v-if="showpassword" v-model="password">
+                <input type="password" maxlength="8" placeholder="密码" v-else v-model="password">
+                <div class="switch_button" :class="showpassword? 'on':'off'" @click="showpassword=!showpassword">
+                  <div class="switch_circle" :class="{right:showpassword}"></div>
+                  <span class="switch_text">{{showpassword?'abc':'...'}}</span>
                 </div>
               </div>
               <div class="login_message">
-                <input type="text" maxlength="11" placeholder="验证码">
-                <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha">
+                <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
+                <img class="get_verification captcha" src="./image/captcha.png" alt="captcha">
               </div>
             </div>
           </div>
@@ -57,10 +59,94 @@
 </template>
 
 <script>
+  import MintUI from 'mint-ui'
+  import vue from 'vue'
+  import {MessageBox} from 'mint-ui';
+  import 'mint-ui/lib/style.css'
+  // import {req_login} from '../../api/api'
+
+  vue.use(MintUI)
   export default {
     data() {
       return {
-        loginWay: false
+        loginWay: true, //false代表密码登录 true代表短信登录
+        phone: '',//手机号码
+        timeout: 0,//计时器的时间
+        showpassword: false, //是否显示密码
+        password: '',//登录密码
+        code: '',//短信验证码
+        username: '',//用户名
+        captcha: '',//图形验证码
+        src: 'static/images/index/login-code.png'
+      }
+    },
+    methods: {
+      //获取手机验证码
+      getcode() {
+        if (this.timeout == 0) {
+          this.timeout = 30
+          const interval = setInterval(() => {
+            this.timeout--
+            if (this.timeout <= 0) {
+              //停止计时
+              clearInterval(interval)
+            }
+          }, 1000)
+        }
+
+      },
+      login() {
+        if (this.loginWay) {
+          // 手机登录
+          const {right_phone, phone, code} = this
+          if (!right_phone) {
+            //手机号码格式不规范
+            MessageBox.alert('手机号码格式不规范', '温馨提示')
+          } else if (!/^1\d{10}$/.test(code)) {
+            //验证码不正确
+            MessageBox.alert('验证码不正确', '温馨提示')
+          }else {
+            MessageBox.alert('暂无登录效果','温馨提示')
+          }
+        } else {
+          // 用户名登录
+          const {username, password, captcha} = this
+          if (!username) {
+            //用户名格式不规范
+            MessageBox.alert('手机号码格式不规范','温馨提示')
+          } else if (!password) {
+            //密码不正确
+            MessageBox.alert('密码不正确', '温馨提示')
+          } else if (!captcha) {
+            //图形验证码不正确
+            MessageBox.alert('图形验证码不正确', '温馨提示')
+          } else {
+            // var data = {
+            //   username: this.username,
+            //   password: this.password,
+            //   captcha: this.captcha
+            // }
+            // let that = this
+            // req_login(data).then(function (res) {
+            //   console.log(res)
+            //   console.log(res.data.info[0])
+            //   localStorage.userinfo = JSON.stringify(res.data.info[0])
+            //   console.log(localStorage.userinfo)
+            //   that.$router.replace('/profile')
+            //
+            // }).catch(function (error) {
+            //   console.log(error)
+            // })
+            MessageBox.alert('暂无登录效果','温馨提示')
+          }
+        }
+      },
+
+    },
+    computed: {
+      right_phone() {
+
+        return /^1\d{10}$/.test(this.phone)
       }
     }
   }
@@ -154,7 +240,12 @@
     background: transparent
   }
 
-  .get_verification .right_phone {
+  .captcha.get_verification {
+    width: 100px;
+    height: 30px;
+  }
+
+  .get_verification.right_phone {
     color: black
   }
 
@@ -183,19 +274,20 @@
   }
 
 
-  .off {
+  .switch_button.off {
     background: #fff
   }
 
-  .switch_text {
-    float: right;
-    color: #ddd
-  }
-
-
-  switch_button > .on {
+  .switch_button.on {
     background: #02a774
   }
+
+  .switch_text {
+    float: left;
+    color: white;
+    margin-top: -0.3px;
+  }
+
 
   .switch_button > .switch_circle {
   / / transform: translateX(27 px);
@@ -211,7 +303,7 @@
     transition: transform .3s
   }
 
-  .right {
+  .switch_button > .switch_circle.right {
     transform: translateX(30px)
   }
 

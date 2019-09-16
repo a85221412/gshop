@@ -7,16 +7,11 @@
 
 <script>
   import FooterGuide from './components/FooterGuide/FooterGuide'
-  import {selectall} from './api/api'
+  import {select_shopslist} from './api/api'
 
   export default {
-    async mounted() {
-      await selectall().then((result) => {
-        console.log(result.data)
-      }).catch((error) => {
-        console.log(error)
-      })
-
+    mounted() {
+      // this.$store.dispatch('select_shopslist')
     },
     components: {
       FooterGuide

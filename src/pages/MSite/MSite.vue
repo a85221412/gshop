@@ -1,14 +1,17 @@
 <template>
   <div class="msite">
     <HeaderTop title="首页">
-      <div class="header_search" slot="left">
+      <router-link class="header_search" slot="left" to="/search">
         <i class="iconfont icon-sousuo "></i>
-      </div>
-      <div class="header_login" slot="right">
-        <span class="header_login_text">登录/注册</span>
-      </div>
+      </router-link>
+      <router-link class="header_login" slot="right" :to="userinfo.username?'/userinfo':'/login'">
+        <span class="header_login_text" v-if="!userinfo.username">登录/注册</span>
+        <span class="header_login_text" v-else>
+          <i class="iconfont icon-wode"></i>
+        </span>
+      </router-link>
     </HeaderTop>
-    <div  class="msite_nav">
+    <div class="msite_nav">
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -47,6 +50,11 @@
 
 
   export default {
+    data() {
+      return {
+        userinfo: {}
+      }
+    },
     mounted() {
       // 创建一个swiper实例对象，来实现轮播
       new Swiper('.swiper-container', {
@@ -69,6 +77,9 @@
         //   el: '.swiper-scrollbar',
         // },
       })
+      if (localStorage.userinfo) {
+        this.userinfo = JSON.parse(localStorage.userinfo)
+      }
     },
     components: {
       HeaderTop,
@@ -176,7 +187,8 @@
     width: 100%;
     height: 100%;
   }
-  .img{
+
+  .img {
     width: 100%;
     height: 200px;
   }
