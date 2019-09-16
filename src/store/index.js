@@ -1,6 +1,3 @@
-/*
-vuex最核心的管理对象store
-*/
 import vue from 'vue'
 import vuex from 'vuex'
 import state from './state'

@@ -1,9 +1,6 @@
-/*
-状态对象
- */
 export default {
   shopslist: {},
-  shopcart: [], //购物车列表
+  shopcart: [],
   goods:[
     {
       type: "汉堡",
